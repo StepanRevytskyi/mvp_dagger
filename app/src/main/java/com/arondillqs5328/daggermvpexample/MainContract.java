@@ -7,6 +7,7 @@ public interface MainContract {
     }
 
     interface Presenter {
+        void detachView();
         void loadMessage();
     }
 

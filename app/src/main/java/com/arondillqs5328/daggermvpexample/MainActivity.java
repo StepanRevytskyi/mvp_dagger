@@ -41,4 +41,10 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     public void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
+
+    @Override
+    protected void onDestroy() {
+        mMainPresenter.detachView();
+        super.onDestroy();
+    }
 }

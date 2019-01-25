@@ -19,6 +19,11 @@ public class MainPresenter implements MainContract.Presenter, MainModelCallback 
     }
 
     @Override
+    public void detachView() {
+        mView = null;
+    }
+
+    @Override
     public void loadMessage() {
         mMainModel.generateMessage();
     }
