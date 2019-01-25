@@ -8,7 +8,6 @@ public interface MainContract {
 
     interface Presenter {
         void loadMessage();
-        void setMessage(String message);
     }
 
     interface Model {

@@ -1,5 +1,6 @@
 package com.arondillqs5328.daggermvpexample;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -19,11 +20,10 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         DaggerMainComponent
                 .builder()
                 .mainPresenterModule(new MainPresenterModule(this))
-                .contextModule(new ContextModule(this))
+                .sharedPreferenceModule(new SharedPreferenceModule(getSharedPreferences("settings", Context.MODE_PRIVATE)))
                 .build()
                 .inject(this);
 

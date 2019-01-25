@@ -1,25 +1,22 @@
 package com.arondillqs5328.daggermvpexample;
 
-import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import javax.inject.Inject;
-import javax.inject.Scope;
-import javax.inject.Singleton;
 
-public class MainPresenter implements MainContract.Presenter{
+public class MainPresenter implements MainContract.Presenter, MainModelCallback {
 
     private MainModel mMainModel;
     private MainContract.View mView;
 
     @Inject
-    public MainPresenter(MainContract.View view, Context context) {
-
+    public MainPresenter(MainContract.View view, SharedPreferences sharedPreferences) {
         Log.i("TAG_Log", "create presenter");
         mView = view;
-        mMainModel = new MainModel(this, context);
+        mMainModel = new MainModel(sharedPreferences);
+        mMainModel.setRepositoryCallback(this);
     }
-
 
     @Override
     public void loadMessage() {
@@ -27,7 +24,7 @@ public class MainPresenter implements MainContract.Presenter{
     }
 
     @Override
-    public void setMessage(String message) {
+    public void onGeneratedMessage(String message) {
         mView.showMessage(message);
     }
 }
